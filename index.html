@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #00ff88, #4d9eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Description Section */
+        .description {
+            text-align: center;
+            padding: 150px 0;
+        }
+
+        .description-text {
+            font-size: 1.2rem;
+            color: #aaaaaa;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .highlight-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #4d9eff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #00ff8855, #4d9eff55);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .feature-item:hover::before {
+            opacity: 0.1;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .feature-title {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        /* Download Section */
+        .download-section {
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(180deg, #000000, #111111);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, #4d9eff22, transparent 60%);
+            top: -50%;
+            left: -50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #4d9eff, #00ff88);
+            color: #000000;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            background: linear-gradient(45deg, #4d9eff33, #00ff8833);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .float-1 { width: 300px; height: 300px; top: 10%; left: 5%; animation: float 8s ease-in-out infinite; }
+        .float-2 { width: 200px; height: 200px; bottom: 20%; right: 10%; animation: float 6s ease-in-out infinite reverse; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .highlight-text {
+                font-size: 2rem;
+            }
+
+            .description-text {
+                font-size: 1.1rem;
+            }
+
+            .floating-element {
+                display: none;
+            }
+        }
+
+        /* Perbaikan untuk tampilan Desktop */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1400px;
+                padding: 0 50px;
+            }
+
+            .hero-title {
+                font-size: 6rem;
+                letter-spacing: -2px;
+            }
+
+            .hero-subtitle {
+                font-size: 2.2rem;
+                max-width: 800px;
+                margin: 0 auto 60px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+                margin: 80px 0;
+                padding: 0 50px;
+            }
+
+            .feature-item {
+                padding: 50px 40px;
+                min-height: 350px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .feature-title {
+                font-size: 2rem;
+                margin-bottom: 25px;
+            }
+
+            .feature-item p {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .description {
+                padding: 200px 0;
+            }
+
+            .highlight-text {
+                font-size: 3.5rem;
+                margin-bottom: 60px;
+            }
+
+            .description-text {
+                font-size: 1.4rem;
+                line-height: 1.8;
+                max-width: 1000px;
+            }
+
+            .download-section {
+                padding: 150px 0;
+            }
+
+            .download-content {
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            .download-btn {
+                padding: 20px 60px;
+                font-size: 1.4rem;
+                margin-top: 50px;
+            }
+
+            /* Floating elements untuk desktop */
+            .float-1 { 
+                width: 500px; 
+                height: 500px; 
+                top: 5%; 
+                left: 0;
+            }
+            
+            .float-2 { 
+                width: 400px; 
+                height: 400px; 
+                bottom: 10%; 
+                right: 0;
+            }
+
+            /* Spacing antar section */
+            .section {
+                padding: 150px 0;
+            }
+
+            /* Animasi lebih halus untuk desktop */
+            .feature-item:hover {
+                transform: translateY(-15px) scale(1.03);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .download-btn:hover {
+                transform: translateY(-7px) scale(1.05);
+                box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
+            }
+        }
+
+        /* Extra large screens */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1600px;
+            }
+
+            .hero-title {
+                font-size: 7rem;
+            }
+
+            .features-grid {
+                gap: 60px;
+                padding: 0 100px;
+            }
+
+            .feature-item {
+                min-height: 400px;
+            }
+        }
+
+        /* Animasi tambahan untuk desktop */
+        @media (min-width: 1024px) {
+            .floating-element {
+                opacity: 0.15;
+                filter: blur(50px);
+            }
+
+            @keyframes float {
+                0%, 100% { 
+                    transform: translate(0, 0) rotate(0deg) scale(1); 
+                }
+                50% { 
+                    transform: translate(-30px, -30px) rotate(15deg) scale(1.1); 
+                }
+            }
+
+            .hero-content {
+                position: relative;
+                z-index: 2;
+            }
+
+            .feature-item::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at center, rgba(77, 158, 255, 0.1), transparent);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .feature-item:hover::after {
+                opacity: 1;
+            }
+        }
+
+        /* Styling untuk social media buttons */
+        .social-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .social-btn i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .social-btn.youtube {
+            background: linear-gradient(45deg, #ff0000, #ff4444);
+        }
+
+        .social-btn.support {
+            background: linear-gradient(45deg, #00ff88, #4d9eff);
+            color: #000;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Update download button style */
+        .download-btn {
+            background: linear-gradient(45deg, #4d9eff, #00ff88);
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-element float-1"></div>
+    <div class="floating-element float-2"></div>
+
+    <section class="section">
+        <div class="container hero-content">
+            <h1 class="hero-title" data-aos="fade-up">LYONS BOT</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Solusi Otomatis WhatsApp untuk Era Digital</p>
+        </div>
+    </section>
+
+    <section class="description">
+        <div class="container">
+            <h2 class="highlight-text" data-aos="fade-up">Fitur Unggulan</h2>
+            <p class="description-text" data-aos="fade-up">
+                Nikmati kemudahan dan kecepatan dalam mengelola pesan WhatsApp Anda. 
+                Bot pintar yang siap membantu bisnis Anda 24/7.
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-item" data-aos="fade-up">
+                    <h3 class="feature-title">Fitur Premium</h3>
+                    <p>Akses penuh ke semua fitur terbaru dan eksklusif untuk pengalaman terbaik</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="feature-title">100% Gratis</h3>
+                    <p>Tanpa biaya tersembunyi, nikmati layanan bot WhatsApp premium secara gratis</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="feature-title">Performa Tinggi</h3>
+                    <p>Menggunakan API terbaru dengan stabilitas dan kecepatan maksimal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="download-section">
+        <div class="container download-content">
+            <h2 class="highlight-text" data-aos="fade-up">LYONS BOT VIP V1</h2>
+            <p class="description-text" data-aos="fade-up">
+                Bergabunglah dengan ribuan pengguna yang telah merasakan kemudahan menggunakan Lyons Bot
+            </p>
+            <a href="#download" class="download-btn" data-aos="fade-up">
+                <i class="fas fa-download"></i> Download Now
+            </a>
+            
+            <div class="social-buttons">
+                <a href="https://www.youtube.com/@LY-TEAM" target="_blank" class="social-btn youtube" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-youtube"></i> Subscribe
+                </a>
+                <a href="https://saweria.co/lyonsxd" target="_blank" class="social-btn support" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-heart"></i> Support
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: false,
+            offset: 100
+        });
+    </script>
+</body>
+</html>
