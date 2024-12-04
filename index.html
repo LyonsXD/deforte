@@ -142,15 +142,26 @@
             position: absolute;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, #4d9eff22, transparent 60%);
+            background: radial-gradient(circle at center, 
+                rgba(77, 158, 255, 0.15) 0%,
+                rgba(77, 158, 255, 0.05) 30%,
+                transparent 70%);
             top: -50%;
             left: -50%;
-            animation: rotate 20s linear infinite;
+            animation: rotateGradient 15s linear infinite;
+            border-radius: 50%;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes rotateGradient {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
         }
 
         .download-content {
@@ -447,6 +458,289 @@
             transform: translateY(-7px);
             box-shadow: 0 15px 30px rgba(0, 255, 136, 0.4);
         }
+
+        /* Styling untuk bot cards */
+        .bot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .bot-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bot-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #00ff8822, #4d9eff22);
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .bot-card:hover::before {
+            opacity: 1;
+        }
+
+        .bot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .bot-name {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ff88, #4d9eff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bot-version {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .bot-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .bot-features li {
+            margin: 10px 0;
+            color: #fff;
+        }
+
+        .bot-features li i {
+            color: #00ff88;
+            margin-right: 10px;
+        }
+
+        .download-btn.small {
+            padding: 12px 30px;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+        .bot-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .tag-new {
+            background: linear-gradient(45deg, #ff0055, #ff4444);
+            color: #fff;
+        }
+
+        .tag-popular {
+            background: linear-gradient(45deg, #00ff88, #4d9eff);
+            color: #000;
+        }
+
+        /* Optimasi card untuk mobile */
+        @media (max-width: 768px) {
+            .bot-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 10px;
+            }
+
+            .bot-card {
+                padding: 25px 20px;
+                min-height: auto;
+            }
+
+            .bot-name {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+
+            .bot-version {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            .bot-features {
+                margin: 15px 0;
+            }
+
+            .bot-features li {
+                font-size: 0.9rem;
+                margin: 8px 0;
+            }
+
+            .download-btn.small {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+
+            .bot-tag {
+                padding: 4px 12px;
+                font-size: 0.8rem;
+                top: 15px;
+                right: 15px;
+            }
+
+            .social-buttons {
+                flex-direction: column;
+                gap: 15px;
+                padding: 0 20px;
+            }
+
+            .social-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+        }
+
+        /* Tambahan untuk animasi yang lebih smooth */
+        .bot-card {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .bot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.15);
+        }
+
+        .bot-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bot-features li i {
+            font-size: 1rem;
+            min-width: 20px;
+        }
+
+        /* Perbaikan spacing untuk desktop */
+        @media (min-width: 1024px) {
+            .bot-grid {
+                gap: 40px;
+                padding: 0 50px;
+            }
+
+            .bot-card {
+                padding: 35px 30px;
+            }
+        }
+
+        /* Update color variables */
+        :root {
+            --primary: #7C3AED;    /* Ungu lebih kuat */
+            --primary-light: #9F67FF;
+            --secondary: #C084FC;
+            --accent: #6D28D9;
+        }
+
+        /* Update gradients */
+        .hero-title, .highlight-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Perbaikan animasi gradasi */
+        .download-section {
+            background: linear-gradient(180deg, #000000, #0a0a0a);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(
+                circle at center,
+                rgba(139, 92, 246, 0.08) 0%,
+                rgba(139, 92, 246, 0.03) 40%,
+                transparent 60%
+            );
+            top: -25%;
+            left: -25%;
+            animation: floatGradient 20s ease-in-out infinite;
+            border-radius: 50%;
+            filter: blur(20px);
+        }
+
+        @keyframes floatGradient {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(-5%, -5%) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Update bot cards */
+        .bot-card {
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s ease;
+        }
+
+        .bot-features {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .bot-features li {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .bot-features li i {
+            color: var(--primary-light);
+            font-size: 1.2rem;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 768px) {
+            .bot-card {
+                padding: 30px 20px;
+            }
+
+            .bot-features li {
+                font-size: 0.9rem;
+                margin: 12px 0;
+            }
+
+            .bot-features li i {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -455,8 +749,8 @@
 
     <section class="section">
         <div class="container hero-content">
-            <h1 class="hero-title" data-aos="fade-up">LYONS BOT</h1>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Solusi Otomatis WhatsApp untuk Era Digital</p>
+            <h1 class="hero-title" data-aos="fade-up">L.Y.O.N.S</h1>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Beranggotakan 1 orang namun tersebar diseluruh dunia</p>
         </div>
     </section>
 
@@ -464,14 +758,14 @@
         <div class="container">
             <h2 class="highlight-text" data-aos="fade-up">Fitur Unggulan</h2>
             <p class="description-text" data-aos="fade-up">
-                Nikmati kemudahan dan kecepatan dalam mengelola pesan WhatsApp Anda. 
-                Bot pintar yang siap membantu bisnis Anda 24/7.
+                Nikmati sensasi menggunakan bot terbaru dengan beragam fitur. 
+                Script bot ini 100% gratis dan tidak ada biaya tersembunyi	.
             </p>
 
             <div class="features-grid">
                 <div class="feature-item" data-aos="fade-up">
-                    <h3 class="feature-title">Fitur Premium</h3>
-                    <p>Akses penuh ke semua fitur terbaru dan eksklusif untuk pengalaman terbaik</p>
+                    <h3 class="feature-title">Fitur tanpa limit</h3>
+                    <p>Tidak seperti bot lainnya yang membatasi fitur bot ini sepenuh nya tanpa batas</p>
                 </div>
                 <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="feature-title">100% Gratis</h3>
@@ -489,12 +783,27 @@
         <div class="container download-content">
             <h2 class="highlight-text" data-aos="fade-up">LYONS BOT VIP V1</h2>
             <p class="description-text" data-aos="fade-up">
-                Bergabunglah dengan ribuan pengguna yang telah merasakan kemudahan menggunakan Lyons Bot
+                Bot WhatsApp multi-fungsi dengan berbagai fitur canggih untuk memenuhi kebutuhan Anda
             </p>
-            <a href="#download" class="download-btn" data-aos="fade-up">
-                <i class="fas fa-download"></i> Download Now
-            </a>
-            
+
+            <div class="bot-grid">
+                <div class="bot-card" data-aos="fade-up">
+                    <h3 class="bot-name">LYONS BOT V1</h3>
+                    <div class="bot-version">Version 1.0.0</div>
+                    <ul class="bot-features">
+                        <li><i class="fas fa-robot"></i> Multi AI Chat</li>
+                        <li><i class="fas fa-image"></i> AI Image Generator & Tools</li>
+                        <li><i class="fas fa-download"></i> Tools Downloader</li>
+                        <li><i class="fas fa-star"></i> Sticker Maker & Tools</li>
+                        <li><i class="fas fa-clock"></i> Auto Response 24/7</li>
+                        <li><i class="fas fa-users"></i> Group Management & Push Kontak</li>
+                    </ul>
+                    <a href="https://github.com/LyonsXD/deforte/raw/main/bot-lyons-vip-1.5-beta.zip" class="download-btn small">
+                        <i class="fas fa-download"></i> Download Now
+                    </a>
+                </div>
+            </div>
+
             <div class="social-buttons">
                 <a href="https://www.youtube.com/@LY-TEAM" target="_blank" class="social-btn youtube" data-aos="fade-up" data-aos-delay="200">
                     <i class="fab fa-youtube"></i> Subscribe
